@@ -1,0 +1,8 @@
+CapaNegocio\ManejadorLibros.class
+com\mycompany\biblioteca\Biblioteca.class
+CapaNegocio\ManejadorUsuario.class
+CapaPersistencia\IDAO.class
+CapaPersistencia\AutorDAOImpl.class
+CapaPersistencia\ConexionDB.class
+CapaPersistencia\UserDAOImpl.class
+CapaPersistencia\LibroDAOImpl.class
