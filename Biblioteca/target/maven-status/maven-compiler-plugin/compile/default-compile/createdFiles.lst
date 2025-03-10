@@ -1,8 +1,11 @@
 CapaNegocio\ManejadorLibros.class
 com\mycompany\biblioteca\Biblioteca.class
+CapaNegocio\Sucursal.class
 CapaNegocio\ManejadorUsuario.class
 CapaPersistencia\IDAO.class
 CapaPersistencia\AutorDAOImpl.class
 CapaPersistencia\ConexionDB.class
 CapaPersistencia\UserDAOImpl.class
+CapaNegocio\Libro.class
+CapaNegocio\Usuario.class
 CapaPersistencia\LibroDAOImpl.class

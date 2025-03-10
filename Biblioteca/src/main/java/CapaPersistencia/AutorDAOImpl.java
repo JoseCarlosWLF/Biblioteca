@@ -35,7 +35,7 @@ public class AutorDAOImpl implements IDAO{
         
         
        String sql = 
-                     "INSERT INTO autor (nombre,apellido, nacionalidad) VALUES (?, ?,?)";
+                     "INSERT INTO autor (nombre,nacionalidad) VALUES (?, ?)";
 
         try (Connection objConexion = conexion.obtenerConexion();
              PreparedStatement consulta = objConexion.prepareStatement(sql)) {
@@ -45,8 +45,7 @@ public class AutorDAOImpl implements IDAO{
             
             consulta.setString(1, (String) datos.get(0));
             consulta.setString(2, (String) datos.get(1));
-            consulta.setString(3, (String) datos.get(2));
-
+          
 
             // Ejecutar la consulta
             int rowsAffected = consulta.executeUpdate();
