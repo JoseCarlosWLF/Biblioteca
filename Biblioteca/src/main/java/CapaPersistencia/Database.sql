@@ -60,6 +60,7 @@ CREATE TABLE Usuario (
     apellido_mat VARCHAR(20) NOT NULL,
     correo VARCHAR(150) NOT NULL,
     telefono VARCHAR(50) NOT NULL,
+    contrasena VARCHAR(50) NOT NULL,
     FOREIGN KEY (id_multa) REFERENCES Multa(id_multa)
 );
 
