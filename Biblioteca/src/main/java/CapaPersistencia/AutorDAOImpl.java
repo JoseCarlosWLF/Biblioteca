@@ -13,6 +13,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import CapaNegocio.Libro;
+import CapaNegocio.Sucursal;
+import CapaNegocio.Usuario;
+
 /**
  *
  * @author vsfs2
@@ -27,7 +31,7 @@ public class AutorDAOImpl implements IDAO{
     }
 
     @Override
-    public void create(ArrayList datos) {
+    public void create(ArrayList<String> datos) {
         
         
        String sql = 
@@ -84,6 +88,30 @@ public class AutorDAOImpl implements IDAO{
             Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al eliminar el usuario", ex);
         }
         return listaAutor;
+    }
+
+    @Override
+    public void prestamo(Libro libro, Usuario usuario) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'prestamo'");
+    }
+
+    @Override
+    public void devolucion(Libro libro, Usuario usuario) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'devolucion'");
+    }
+
+    @Override
+    public void multa(long diasDiferencia, Usuario usuario) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'multa'");
+    }
+
+    @Override
+    public void consularLibroSucursal(Sucursal sucursal) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'consularLibroSucursal'");
     }
     
 }

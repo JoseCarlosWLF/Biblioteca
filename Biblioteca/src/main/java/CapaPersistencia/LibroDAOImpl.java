@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import CapaNegocio.Libro;
+import CapaNegocio.Sucursal;
+import CapaNegocio.Usuario;
 
 /**
  *
@@ -27,7 +30,7 @@ public class LibroDAOImpl implements IDAO {
     }
 
     @Override
-    public void create(ArrayList datos) {
+    public void create(@SuppressWarnings("rawtypes") ArrayList datos) {
         String sql = 
                      "INSERT INTO libro (titulo, editorial, id_autor, anio) VALUES (?, ?, ?,?)";
 
@@ -91,6 +94,92 @@ public class LibroDAOImpl implements IDAO {
         return listaLibros;
     }
 
+    @Override
+    public void prestamo(Libro libro, Usuario usuario) {
+        String sql = 
+                "INSERT INTO prestamo (id_libro, id_usuario, fecha_prestamo, fecha_devolucion) VALUES (?, ?, ?,?)";
+
+        try (Connection objConexion = conexion.obtenerConexion();
+             PreparedStatement consulta = objConexion.prepareStatement(sql)) {
+
+   
+            // Asignar valores a los parámetros de la consulta
+            
+            consulta.setInt(1, libro.getId());
+            consulta.setInt(2, usuario.getId());
+            consulta.setString(3, "2021-10-10");
+            consulta.setString(4, "2021-10-20");
+      
+
+            // Ejecutar la consulta
+            int rowsAffected = consulta.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Prestamo guardado");
+            } else {
+                System.out.println("No se pudo guardar el prestamo");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al guardar el prestamo", ex);
+        }
+
     }
+
+    @Override
+    public void devolucion(Libro libro, Usuario usuario) {
+        String sql = 
+                "DELETE FROM prestamo WHERE id_libro = ? AND id_usuario = ?";
+
+        try (Connection objConexion = conexion.obtenerConexion();
+             PreparedStatement consulta = objConexion.prepareStatement(sql)) {
+
+   
+            // Asignar valores a los parámetros de la consulta
+            
+            consulta.setInt(1, libro.getId());
+            consulta.setInt(2, usuario.getId());
+      
+
+            // Ejecutar la consulta
+            int rowsAffected = consulta.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Devolucion guardada");
+            } else {
+                System.out.println("No se pudo guardar la devolucion");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al guardar la devolucion", ex);
+    }
+
+}
+
+    @Override
+    public void consularLibroSucursal(Sucursal sucursal) {
+        String sql = 
+                "SELECT * FROM libro WHERE id_sucursal = ?";
+        try (Connection objConexion = conexion.obtenerConexion();
+             PreparedStatement consulta = objConexion.prepareStatement(sql)) {
+
+   
+            // Asignar valores a los parámetros de la consulta
+            
+            consulta.setInt(1, sucursal.getId());
+      
+
+            // Ejecutar la consulta
+            ResultSet resultado = consulta.executeQuery();
+            while (resultado.next()) {
+                System.out.println(resultado.getString("titulo"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al consultar el libro", ex);
+        }
+    }
+
+    @Override
+    public void multa(long diasDiferencia, Usuario usuario) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'multa'");
+    }
+}
     
 

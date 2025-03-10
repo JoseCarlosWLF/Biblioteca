@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package CapaNegocio;
+import CapaPersistencia.ConexionDB;
 
 /**
  *
@@ -11,6 +12,7 @@ package CapaNegocio;
 public class ManejadorLibros {
     
     public void consultarCatalogo(){
+        // Consulta el catalogo de libros en la base de datos
         
     }
     

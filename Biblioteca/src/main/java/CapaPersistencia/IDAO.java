@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package CapaPersistencia;
+import CapaNegocio.Libro;
+import CapaNegocio.Usuario;
+import CapaNegocio.Sucursal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +15,10 @@ import java.util.List;
  * @author vsfs2
  */
 public interface IDAO {
-    void create(ArrayList datos); //Crear
+    void create(ArrayList<String> datos); //Crear
     public List<List<String>>  consultar(); 
-    //void delete(int id); //borrar
-    //public void update(); //actualizar     
+    void prestamo(Libro libro, Usuario usuario);
+    void devolucion(Libro libro, Usuario usuario);  
+    void multa(long diasDiferencia, Usuario usuario);
+    void consularLibroSucursal(Sucursal sucursal);  
 }
