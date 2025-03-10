@@ -32,7 +32,7 @@ public class LibroDAOImpl implements IDAO {
     @Override
     public void create(@SuppressWarnings("rawtypes") ArrayList datos) {
         String sql = 
-                     "INSERT INTO libro (titulo, editorial, id_autor, anio) VALUES (?, ?, ?,?)";
+                     "INSERT INTO libro (titulo, editorial, id_autor, anio, cantidad) VALUES (?, ?, ?,?,?)";
 
         try (Connection objConexion = conexion.obtenerConexion();
              PreparedStatement consulta = objConexion.prepareStatement(sql)) {
@@ -44,6 +44,7 @@ public class LibroDAOImpl implements IDAO {
             consulta.setString(2, (String) datos.get(1));
             consulta.setInt(3,(int) datos.get(2));
             consulta.setInt(4,(int) datos.get(3));
+            consulta.setInt(5,(int) datos.get(4));
       
 
             // Ejecutar la consulta
@@ -122,6 +123,28 @@ public class LibroDAOImpl implements IDAO {
             Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al guardar el prestamo", ex);
         }
 
+        String sql2=
+                "UPDATE libro SET cantidad = cantidad - 1 WHERE id = ?";
+        try (Connection objConexion = conexion.obtenerConexion();
+                PreparedStatement consulta = objConexion.prepareStatement(sql2)) {
+    
+    
+                // Asignar valores a los parámetros de la consulta
+                
+                consulta.setInt(1, libro.getId());
+        
+    
+                // Ejecutar la consulta
+                int rowsAffected = consulta.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Cantidad de libros actualizada");
+                } else {
+                    System.out.println("No se pudo actualizar la cantidad de libros");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al actualizar la cantidad de libros", ex);
+            }
+
     }
 
     @Override
@@ -148,6 +171,7 @@ public class LibroDAOImpl implements IDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al guardar la devolucion", ex);
+
     }
 
 }

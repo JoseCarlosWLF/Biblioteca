@@ -48,6 +48,7 @@ CREATE TABLE Libro (
     editorial VARCHAR(100) NOT NULL,
     id_autor INT,
     id_sucursal INT,
+    cantidad INT NOT NULL DEFAULT 0,
     FOREIGN KEY (id_sucursal) REFERENCES Sucursal(id_sucursal),
     FOREIGN KEY (id_autor) REFERENCES Autor(id_autor)
 );
