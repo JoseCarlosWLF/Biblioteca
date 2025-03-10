@@ -9,7 +9,8 @@ CREATE TABLE Usuario (
     apellido_pat VARCHAR(20) NOT NULL,
     apellido_mat VARCHAR(20) NOT NULL,
     correo VARCHAR(150) NOT NULL,
-    telefono VARCHAR(50) NOT NULL
+    telefono VARCHAR(50) NOT NULL,
+    contrasena VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Inventario (
