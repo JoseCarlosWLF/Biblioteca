@@ -53,6 +53,13 @@ CREATE TABLE Devolucion (
     fecha_devolucion DATE NOT NULL,
     FOREIGN KEY (id_prestamo) REFERENCES Prestamo(id_prestamo)
 );
+
+CREATE TABLE Administrador (
+    id_administrador INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
 CREATE TABLE Sucursal (
     id_sucursal INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
