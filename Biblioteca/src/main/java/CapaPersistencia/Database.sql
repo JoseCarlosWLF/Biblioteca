@@ -10,7 +10,8 @@ CREATE TABLE Usuario (
     apellido_mat VARCHAR(20) NOT NULL,
     correo VARCHAR(150) NOT NULL,
     telefono VARCHAR(50) NOT NULL,
-    contrasena VARCHAR(50) NOT NULL
+    contrasena VARCHAR(50) NOT NULL,
+    tipo_usuario INT NOT NULL
 );
 
 CREATE TABLE Autor (
@@ -54,18 +55,12 @@ CREATE TABLE Devolucion (
     FOREIGN KEY (id_prestamo) REFERENCES Prestamo(id_prestamo)
 );
 
-CREATE TABLE Administrador (
-    id_administrador INT AUTO_INCREMENT PRIMARY KEY,
-    id_usuario INT NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
-);
-
 CREATE TABLE Sucursal (
     id_sucursal INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     direccion VARCHAR(200) NOT NULL,
-    id_administrador INT,
-    FOREIGN KEY (id_administrador) REFERENCES Administrador(id_administrador)
+    id_administrador INT NOT NULL,
+    FOREIGN KEY (id_administrador) REFERENCES Usuario(id_usuario)
 );
 
 CREATE TABLE Inventario (
@@ -77,12 +72,12 @@ CREATE TABLE Inventario (
     FOREIGN KEY (id_libro) REFERENCES Libro(id_libro)
 );
 
-INSERT INTO Usuario (nombre, apellido_pat, apellido_mat, correo, telefono, contrasena) VALUES
-('Maria', 'Gonzalez', 'Lopez', 'maria.gonzalez@example.com', '5551234567', 'contrasena123'),
-('Juan', 'Perez', 'Martinez', 'juan.perez@example.com', '5559876543', 'segura456'),
-('Ana', 'Ramirez', 'Santos', 'ana.ramirez@example.com', '5557418529', 'clave789'),
-('Carlos', 'Hernandez', 'Diaz', 'carlos.hernandez@example.com', '5553692587', 'pass1234'),
-('Lucia', 'Flores', 'Garcia', 'lucia.flores@example.com', '5556547891', 'password567');
+INSERT INTO Usuario (nombre, apellido_pat, apellido_mat, correo, telefono, contrasena, tipo_usuario) VALUES
+('Maria', 'Gonzalez', 'Lopez', 'maria.gonzalez@example.com', '5551234567', 'contrasena123',0),
+('Juan', 'Perez', 'Martinez', 'juan.perez@example.com', '5559876543', 'segura456',0),
+('Ana', 'Ramirez', 'Santos', 'ana.ramirez@example.com', '5557418529', 'clave789',0),
+('Carlos', 'Hernandez', 'Diaz', 'carlos.hernandez@example.com', '5553692587', 'pass1234',0),
+('Lucia', 'Flores', 'Garcia', 'lucia.flores@example.com', '5556547891', 'password567',0);
 
 -- Insertar registros en la tabla Autor
 INSERT INTO Autor (nombre, nacionalidad) VALUES
@@ -104,5 +99,3 @@ INSERT INTO Libro (titulo, editorial, id_autor, cantidad) VALUES
 SELECT * FROM Usuario;
 SELECT * FROM Autor;
 SELECT * FROM Libro;
-
-
