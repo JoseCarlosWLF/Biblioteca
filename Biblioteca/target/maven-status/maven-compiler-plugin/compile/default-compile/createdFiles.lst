@@ -5,6 +5,7 @@ CapaNegocio\ManejadorUsuario.class
 CapaPersistencia\IDAO.class
 CapaPersistencia\AutorDAOImpl.class
 CapaPersistencia\ConexionDB.class
+CapaPersistencia\PrestamoDAOImpl.class
 CapaPersistencia\UserDAOImpl.class
 CapaNegocio\Libro.class
 CapaNegocio\Usuario.class

@@ -31,9 +31,9 @@ public class UserDAOImpl implements IDAO{
     
      @Override
      
-    public void create(ArrayList<String> datos) {//crear nuevo usuario con los datos que hay en el arreglo
+    public void create(ArrayList<Object> datos) {//crear nuevo usuario con los datos que hay en el arreglo
              String sql = 
-                     "INSERT INTO usuario (nombre, apellido_pat, apellido_mat, correo, telefono, contraseña) VALUES (?, ?, ?, ?, ?,?)";
+                     "INSERT INTO usuario (nombre, apellido_pat, apellido_mat, correo, telefono, contrasena) VALUES (?, ?, ?, ?, ?,?)";
 
         try (Connection objConexion = conexion.obtenerConexion();
              PreparedStatement consulta = objConexion.prepareStatement(sql)) {
@@ -46,7 +46,7 @@ public class UserDAOImpl implements IDAO{
             consulta.setString(3, (String) datos.get(2));
             consulta.setString(4, (String) datos.get(3));
             consulta.setString(5, (String) datos.get(4));
-            consulta.setString(6, (String) datos.get(6));
+            consulta.setString(6, (String) datos.get(5));
 
             // Ejecutar la consulta
             int rowsAffected = consulta.executeUpdate();

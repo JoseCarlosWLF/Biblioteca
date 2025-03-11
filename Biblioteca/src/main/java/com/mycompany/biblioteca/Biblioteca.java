@@ -1,5 +1,6 @@
 package com.mycompany.biblioteca;
 
+import CapaNegocio.ManejadorLibros;
 import CapaPersistencia.AutorDAOImpl;
 import CapaPersistencia.LibroDAOImpl;
 import CapaPersistencia.UserDAOImpl;
@@ -19,12 +20,23 @@ public class Biblioteca {
 
     public static void main(String[] args) {
         
+        ManejadorLibros manejador  = new ManejadorLibros();
         
-LibroDAOImpl prueba3 = new LibroDAOImpl();
-
-System.out.println(prueba3.consultar()); 
-
-
+        ArrayList datos1 = new ArrayList();
+        ArrayList datos2 = new ArrayList();       
+        
+        datos1.add(2);
+        datos1.add(1);
+        
+        datos2.add(2);
+        datos2.add(1);
+        
+        System.out.println(manejador.registrarPrestamo(datos1));
+        System.out.println(manejador.registrarPrestamo(datos2));
+        
+        
+         
+               
 
 }
 }

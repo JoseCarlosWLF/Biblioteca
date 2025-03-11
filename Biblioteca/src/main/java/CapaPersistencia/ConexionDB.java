@@ -16,9 +16,9 @@ import java.sql.SQLException;
 public class ConexionDB {
     
     private Connection conexion;
-    public static final String URL = "jdbc:mysql://localhost/db_modelo1";
+    public static final String URL = "jdbc:mysql://localhost/db_modelo2";
     public static final String USER = "root";
-    public static final String PASSWORD = "";
+    public static final String PASSWORD = "misionsos";
     public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     
     //conn =DriverManager.getConnection("jdbc:mysql://localhost/test?" +"user=minty&password=greatsqldb");

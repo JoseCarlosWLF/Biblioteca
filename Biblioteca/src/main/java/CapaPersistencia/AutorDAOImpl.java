@@ -30,8 +30,8 @@ public class AutorDAOImpl implements IDAO{
         System.out.println("com.mycompany.usuariodao.UserDaoImpl.<init>()");
     }
 
-    @Override
-    public void create(ArrayList<String> datos) {
+   @Override
+    public void create(ArrayList<Object> datos) {
         
         
        String sql = 

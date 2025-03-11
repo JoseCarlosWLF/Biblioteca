@@ -4,13 +4,21 @@
  */
 package CapaNegocio;
 
+import CapaPersistencia.UserDAOImpl;
+import java.util.ArrayList;
+
+
+
 /**
  *
  * @author vsfs2
  */
 public class ManejadorUsuario {
     
-    public void guardarUsuario(){  
+    public void guardarUsuario(ArrayList<Object> datos){  
+        UserDAOImpl usuario = new UserDAOImpl();
+        usuario.create(datos);
+  
     }; 
     
     public void verificarUsuario(){
