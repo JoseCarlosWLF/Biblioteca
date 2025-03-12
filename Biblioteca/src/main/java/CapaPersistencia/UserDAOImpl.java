@@ -114,63 +114,16 @@ public class UserDAOImpl implements IDAO{
     }
 
   //--------------------------------------------------------------------------------------------------
-    public void prestamo(Libro libro, Usuario usuario) {
-        String sql = 
-                "INSERT INTO prestamo (id_libro, id_usuario, fecha_prestamo, fecha_devolucion) VALUES (?, ?, ?,?)";
-        try (Connection objConexion = conexion.obtenerConexion();
-             PreparedStatement consulta = objConexion.prepareStatement(sql)) {
-
     
-            // Asignar valores a los parámetros de la consulta
-            
-            consulta.setInt(1, libro.getId());
-            consulta.setInt(2, usuario.getId());
-            consulta.setString(3, "2021-10-10");
-            consulta.setString(4, "2021-10-20");
-      
-            // Ejecutar la consulta
-            int rowsAffected = consulta.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Prestamo guardado");
-            } else {
-                System.out.println("No se pudo guardar el prestamo");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al guardar el prestamo", ex);
-        }
-    }
-//-----------------------------------------------------------------------------------------------------
-    public void devolucion(Libro libro, Usuario usuario) {
+    public void multa(int id_prestamo, int monto, int id_usuario) {
         String sql = 
-                "DELETE FROM prestamo WHERE id_libro = ? AND id_usuario = ?";
+                "INSERT INTO multa (id_usuario, monto,id_usuario) VALUES (?, ?,?)";
         try (Connection objConexion = conexion.obtenerConexion();
                 PreparedStatement consulta = objConexion.prepareStatement(sql)) {
     
-                consulta.setInt(1, libro.getId());
-                consulta.setInt(2, usuario.getId());
-    
-                int rowsAffected = consulta.executeUpdate();
-                if (rowsAffected > 0) {
-                    System.out.println("Devolucion exitosa");
-                } else {
-                    System.out.println("No se pudo devolver el libro");
-                }
-    
-            } catch (SQLException ex) {
-                Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al devolver el libro", ex);
-            }
-    }
-
- //----------------------------------------------------------------------------------------------------
-    public void multa(long diasDiferencia, Usuario usuario) {
-        String sql = 
-                "INSERT INTO multa (id_usuario, dias_diferencia) VALUES (?, ?)";
-        try (Connection objConexion = conexion.obtenerConexion();
-                PreparedStatement consulta = objConexion.prepareStatement(sql)) {
-    
-                consulta.setInt(1, usuario.getId());
-                consulta.setLong(2, diasDiferencia);
-    
+                consulta.setInt(1, id_prestamo);
+                consulta.setLong(2, monto);
+                consulta.setInt(3, id_usuario);
                 int rowsAffected = consulta.executeUpdate();
                 if (rowsAffected > 0) {
                     System.out.println("Multa guardada");

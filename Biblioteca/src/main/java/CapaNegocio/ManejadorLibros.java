@@ -16,10 +16,6 @@ import java.util.ArrayList;
  */
 public class ManejadorLibros {
     
-    public void consultarCatalogo(){
-        // Consulta el catalogo de libros en la base de datos
-        
-    }
     
     public void validarMaterial(){
         // Valida si el codigo del libro ingresado existe en la base de datos
@@ -44,26 +40,10 @@ public class ManejadorLibros {
     }
         
         
-        
-    
-    public void registrarDevolución(){
-        
-    }
-    
+     
    public long generarMulta(long diasDiferencia){
         long multa = diasDiferencia*2; 
         return multa;
     }
    
-   public LocalDate generarFecha(){
-       
-       
-   
-    
-     return null;
-       
-       
-   
-    
-}
 } 
