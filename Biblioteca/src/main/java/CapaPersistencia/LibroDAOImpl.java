@@ -61,12 +61,8 @@ public class LibroDAOImpl implements IDAO {
         }
 
     }
-
-    //@Override
-    public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+    
+    
     @Override
     public List<List<String>> consultar() {
         String sql = 
@@ -95,10 +91,36 @@ public class LibroDAOImpl implements IDAO {
         }
         return listaLibros;
     }
+
+    //@Override
+    public void delete(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     
-    public void devolucion(int id_usuario, int id_libro) {
+    public boolean consultarLibroID(int id_libro) {
+    String sql = "SELECT 1 FROM libro WHERE id_libro = ? LIMIT 1"; // Solo devuelve un valor si existe
+    
+    try (Connection objConexion = conexion.obtenerConexion();
+         PreparedStatement consulta = objConexion.prepareStatement(sql)) {
+        
+        consulta.setInt(1, id_libro); // Asignar el valor del parámetro
+        
+        try (ResultSet resultado = consulta.executeQuery()) {
+            return resultado.next(); // Si hay al menos un resultado, el libro existe
+        }
+        
+    } catch (SQLException ex) {
+        Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al consultar el libro", ex);
+    }
+    
+    return false; // Si ocurre un error o no se encuentra el libro, devolver false
+}
+
+    
+    public void devolucion(int id_prestamo, int id_usuario, int id_libro) {
         String sql = 
-                "DELETE FROM prestamo WHERE id_libro = ? AND id_usuario = ?";
+                "DELETE FROM prestamo WHERE id_prestamo = ?";
 
         try (Connection objConexion = conexion.obtenerConexion();
              PreparedStatement consulta = objConexion.prepareStatement(sql)) {
@@ -106,8 +128,8 @@ public class LibroDAOImpl implements IDAO {
    
             // Asignar valores a los parámetros de la consulta
             
-            consulta.setInt(1, id_libro);
-            consulta.setInt(2, id_usuario);
+            consulta.setInt(1, id_prestamo);
+            
       
 
             // Ejecutar la consulta
@@ -146,9 +168,33 @@ public class LibroDAOImpl implements IDAO {
        } catch (SQLException ex) {
             Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al guardar el libro", ex);
         }   
-             
+        
+        
+        String sql3=
+                "UPDATE libro SET cantidad = cantidad + 1 WHERE id_libro= ?";
+        try (Connection objConexion = conexion.obtenerConexion();
+                PreparedStatement consulta = objConexion.prepareStatement(sql3)) {
+    
+    
+                // Asignar valores a los parámetros de la consulta
+                
+                consulta.setInt(1,id_libro);
+        
+    
+                // Ejecutar la consulta
+                int rowsAffected = consulta.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Cantidad de libros actualizada");
+                } else {
+                    System.out.println("No se pudo actualizar la cantidad de libros");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al actualizar la cantidad de libros", ex);
+            }     
 
-}
+    }
+    
+  
 
     public void consularLibroSucursal(Sucursal sucursal) {
         String sql = 

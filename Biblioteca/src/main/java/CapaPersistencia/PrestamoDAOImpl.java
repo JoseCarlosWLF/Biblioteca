@@ -86,7 +86,7 @@ public class PrestamoDAOImpl implements IDAO{
     }
 
    
-  
+   //Metodo que guarda todos los prestamos de la biblioteca en una lista de listas 
    @Override
     public List<List<String>> consultar() {
         
@@ -112,15 +112,16 @@ public class PrestamoDAOImpl implements IDAO{
                 }
 
         System.out.println("Lista de usuarios cargada correctamente");
+        return listaPrestamo;
 
         } catch (SQLException ex) {
             Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al eliminar el usuario", ex);
         }
-        return listaPrestamo;
+        return null;
        
     }
     
-    
+    // Método que guarda todos los prestamos de un usuario en particular en una lista de listas. Cada lista es una fila de la tabla. 
     public List<List<String>> consultarUsuarioPrestamos(int id) {
         
     String sql = "SELECT * FROM prestamo WHERE id_usuario = ?";
@@ -153,10 +154,27 @@ public class PrestamoDAOImpl implements IDAO{
 
     return null;
 }
+    
+   // Método que consulta la existencia de un prestamo  de un libro de un usuario
+public boolean consultarPrestamoLibro(int id_libro, int id_usuario) {
+    String sql = "SELECT 1 FROM prestamo WHERE id_libro = ? AND id_usuario = ? LIMIT 1"; // Solo devuelve un valor si existe
+    
+    try (Connection objConexion = conexion.obtenerConexion();
+         PreparedStatement consulta = objConexion.prepareStatement(sql)) {
+        
+        consulta.setInt(1, id_libro); // Asignar el valor del parámetro
+        consulta.setInt(2, id_usuario);
+        try (ResultSet resultado = consulta.executeQuery()) {
+            return resultado.next(); // Si hay al menos un resultado, el libro existe
+        }
+        
+    } catch (SQLException ex) {
+        Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al consultar el libro", ex);
+    }
+    
+    return false; // Si ocurre un error o no se encuentra el libro, devolver false
+}
 
-    
-    
-    
-    
+ 
     
 }

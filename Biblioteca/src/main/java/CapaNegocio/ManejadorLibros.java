@@ -4,6 +4,7 @@
  */
 package CapaNegocio;
 import CapaPersistencia.ConexionDB;
+import CapaPersistencia.LibroDAOImpl;
 import CapaPersistencia.PrestamoDAOImpl;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -17,8 +18,21 @@ import java.util.ArrayList;
 public class ManejadorLibros {
     
     
-    public void validarMaterial(){
-        // Valida si el codigo del libro ingresado existe en la base de datos
+    public String registrarDevolucion(int id_prestamo, int id_usuario, int id_libro ){
+       LibroDAOImpl l = new LibroDAOImpl();
+       PrestamoDAOImpl p = new PrestamoDAOImpl();
+       
+       if ((l.consultarLibroID(id_libro))){  // Validar si el libro existe 
+           if(p.consultarPrestamoLibro(id_libro,id_usuario)){ // Verifica si el libro está en los prestamos del usuario  
+               l.devolucion(id_prestamo,id_usuario,id_libro); // Genera la devolución en la base de datos  
+               return "DEVOLUCIÓN EXITOSA";
+           }else{
+            return "EL LIBRO NO ESTÁ EN LOS PRESTAMOS DEL USUARIO";
+    
+            }
+        } else{
+           return "LIBRO NO EXISTE";  
+       }
     }
      
     
