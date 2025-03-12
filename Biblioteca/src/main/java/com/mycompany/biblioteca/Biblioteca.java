@@ -3,6 +3,7 @@ package com.mycompany.biblioteca;
 import CapaNegocio.ManejadorLibros;
 import CapaPersistencia.AutorDAOImpl;
 import CapaPersistencia.LibroDAOImpl;
+import CapaPersistencia.PrestamoDAOImpl;
 import CapaPersistencia.UserDAOImpl;
 import java.util.ArrayList;
 
@@ -29,14 +30,21 @@ public class Biblioteca {
         datos1.add(1);
         
         datos2.add(2);
-        datos2.add(1);
+        datos2.add(2);
         
         System.out.println(manejador.registrarPrestamo(datos1));
         System.out.println(manejador.registrarPrestamo(datos2));
         
         
+        
+        
+         //System.out.println(p.consultar());
          
-               
-
-}
+        
+       LibroDAOImpl p = new LibroDAOImpl();
+       p.devolucion(1,2);
+        
+        
+         
+    }
 }

@@ -18,9 +18,5 @@ public interface IDAO { // Aquí sólo van las CRUD
     void create(ArrayList<Object> datos); //Crear
     public List<List<String>>  consultar(); 
     //falta borrar y actualizar 
-    
-    void prestamo(Libro libro, Usuario usuario);
-    void devolucion(Libro libro, Usuario usuario);  
-    void multa(long diasDiferencia, Usuario usuario);
-    void consularLibroSucursal(Sucursal sucursal);  
+   
 }

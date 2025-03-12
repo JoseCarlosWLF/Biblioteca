@@ -9,6 +9,7 @@ import CapaNegocio.Sucursal;
 import CapaNegocio.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +30,10 @@ public class PrestamoDAOImpl implements IDAO{
         System.out.println("com.mycompany.usuariodao.UserDaoImpl.<init>()");
     }
 
-  
-   public String prestamo(ArrayList<Object> datos) {
-        String sql = 
+  @Override
+   public void create(ArrayList<Object> datos) {
+       
+       String sql = 
                 "INSERT INTO prestamo (id_libro, id_usuario, fecha_prestamo, fecha_limite) VALUES (?, ?, ?,?)";
 
         try (Connection objConexion = conexion.obtenerConexion();
@@ -79,82 +81,82 @@ public class PrestamoDAOImpl implements IDAO{
                 Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al actualizar la cantidad de libros", ex);
             }
 
-         return "Préstamo registrado correctamente";
+         //return "Préstamo registrado correctamente";
+        
     }
 
-    
+   
+  
    @Override
     public List<List<String>> consultar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        String sql = 
+                "SELECT * FROM prestamo";
+        
+        List<List<String>> listaPrestamo = new ArrayList<>();
+        
+        try (Connection objConexion = conexion.obtenerConexion();
+             PreparedStatement consulta = objConexion.prepareStatement(sql);
+               ResultSet resultado = consulta.executeQuery()) {
+            
+            
+            
+       int columnas = resultado.getMetaData().getColumnCount();
+               
+        while (resultado.next()) { // Iterar sobre cada fila obtenida
+                    List<String> fila = new ArrayList<>();
+                    for (int i = 1; i <= columnas; i++) {
+                        fila.add(resultado.getString(i)); // Agregar cada campo como String
+                    }
+                    listaPrestamo.add(fila);
+                }
+
+        System.out.println("Lista de usuarios cargada correctamente");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al eliminar el usuario", ex);
+        }
+        return listaPrestamo;
+       
     }
     
+    
+    public List<List<String>> consultarUsuarioPrestamos(int id) {
+        
+    String sql = "SELECT * FROM prestamo WHERE id_usuario = ?";
+    List<List<String>> listaPrestamo = new ArrayList<>();
 
+    try (Connection objConexion = conexion.obtenerConexion();
+         PreparedStatement consulta = objConexion.prepareStatement(sql)) {
+        
+        consulta.setInt(1, id); // Primero se asigna el parámetro
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-     @Override
-    public void multa(long diasDiferencia, Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try (ResultSet resultado = consulta.executeQuery()) { // Se ejecuta correctamente después de asignar el parámetro
+            
+            int columnas = resultado.getMetaData().getColumnCount();
+
+            while (resultado.next()) { // Iterar sobre cada fila obtenida
+                List<String> fila = new ArrayList<>();
+                for (int i = 1; i <= columnas; i++) {
+                    fila.add(resultado.getString(i)); // Agregar cada campo como String
+                }
+                listaPrestamo.add(fila);
+            }
+        }
+        
+        System.out.println("Lista de prestamos cargada correctamente");
+        return listaPrestamo;
+
+    } catch (SQLException ex) {
+        Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al consultar los préstamos", ex);
     }
 
-    @Override
-    public void consularLibroSucursal(Sucursal sucursal) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    return null;
+}
 
-  
- 
-
-    @Override
-    public void devolucion(Libro libro, Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void prestamo(Libro libro, Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void create(ArrayList<Object> datos) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-
+    
+    
+    
     
     
 }

@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import CapaNegocio.Libro;
 import CapaNegocio.Sucursal;
 import CapaNegocio.Usuario;
+import java.time.LocalDate;
 
 /**
  *
@@ -30,7 +31,7 @@ public class LibroDAOImpl implements IDAO {
     }
 
     @Override
-    public void create(@SuppressWarnings("rawtypes") ArrayList datos) {
+    public void create(ArrayList<Object> datos) {
         String sql = 
                      "INSERT INTO libro (titulo, editorial, id_autor, anio, cantidad) VALUES (?, ?, ?,?,?)";
 
@@ -94,61 +95,8 @@ public class LibroDAOImpl implements IDAO {
         }
         return listaLibros;
     }
-
-    @Override
-    public void prestamo(Libro libro, Usuario usuario) {
-        String sql = 
-                "INSERT INTO prestamo (id_libro, id_usuario, fecha_prestamo, fecha_devolucion) VALUES (?, ?, ?,?)";
-
-        try (Connection objConexion = conexion.obtenerConexion();
-             PreparedStatement consulta = objConexion.prepareStatement(sql)) {
-
-   
-            // Asignar valores a los parámetros de la consulta
-            
-            consulta.setInt(1, libro.getId());
-            consulta.setInt(2, usuario.getId());
-            consulta.setString(3, "2021-10-10");
-            consulta.setString(4, "2021-10-20");
-      
-
-            // Ejecutar la consulta
-            int rowsAffected = consulta.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Prestamo guardado");
-            } else {
-                System.out.println("No se pudo guardar el prestamo");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al guardar el prestamo", ex);
-        }
-
-        String sql2=
-                "UPDATE libro SET cantidad = cantidad - 1 WHERE id = ?";
-        try (Connection objConexion = conexion.obtenerConexion();
-                PreparedStatement consulta = objConexion.prepareStatement(sql2)) {
     
-    
-                // Asignar valores a los parámetros de la consulta
-                
-                consulta.setInt(1, libro.getId());
-        
-    
-                // Ejecutar la consulta
-                int rowsAffected = consulta.executeUpdate();
-                if (rowsAffected > 0) {
-                    System.out.println("Cantidad de libros actualizada");
-                } else {
-                    System.out.println("No se pudo actualizar la cantidad de libros");
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al actualizar la cantidad de libros", ex);
-            }
-
-    }
-
-    @Override
-    public void devolucion(Libro libro, Usuario usuario) {
+    public void devolucion(int id_usuario, int id_libro) {
         String sql = 
                 "DELETE FROM prestamo WHERE id_libro = ? AND id_usuario = ?";
 
@@ -158,8 +106,8 @@ public class LibroDAOImpl implements IDAO {
    
             // Asignar valores a los parámetros de la consulta
             
-            consulta.setInt(1, libro.getId());
-            consulta.setInt(2, usuario.getId());
+            consulta.setInt(1, id_libro);
+            consulta.setInt(2, id_usuario);
       
 
             // Ejecutar la consulta
@@ -171,12 +119,37 @@ public class LibroDAOImpl implements IDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al guardar la devolucion", ex);
-
     }
+        
+     String sql2 = 
+                     "INSERT INTO devolucion (id_usuario,fecha_devolucion) VALUES (?, ?)";
+
+        try (Connection objConexion = conexion.obtenerConexion();
+             PreparedStatement consulta = objConexion.prepareStatement(sql2)) {
+
+   
+            // Asignar valores a los parámetros de la consulta
+            
+            consulta.setInt(1, id_usuario);
+            consulta.setString(2, LocalDate.now().toString());
+
+      
+
+            // Ejecutar la consulta
+            int rowsAffected = consulta.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Devolucion registrada");
+            } else {
+                System.out.println("No se pudo cargar la devolucion");
+            }
+ 
+       } catch (SQLException ex) {
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al guardar el libro", ex);
+        }   
+             
 
 }
 
-    @Override
     public void consularLibroSucursal(Sucursal sucursal) {
         String sql = 
                 "SELECT * FROM libro WHERE id_sucursal = ?";
@@ -199,11 +172,6 @@ public class LibroDAOImpl implements IDAO {
         }
     }
 
-    @Override
-    public void multa(long diasDiferencia, Usuario usuario) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'multa'");
-    }
 }
     
 

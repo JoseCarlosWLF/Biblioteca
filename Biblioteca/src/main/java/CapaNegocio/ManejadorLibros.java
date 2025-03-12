@@ -35,8 +35,8 @@ public class ManejadorLibros {
             datos.add(fechaLimite);
             
             PrestamoDAOImpl registro = new PrestamoDAOImpl();
-            
-            return registro.prestamo(datos); // Retornamos la confirmación directamente
+            registro.create(datos);
+            return "Registro Completado correctamente"; // Retornamos la confirmación directamente
             
         } catch (Exception e) {  // Captura una excepción más general
             return "Error al registrar el préstamo: " + e.getMessage();

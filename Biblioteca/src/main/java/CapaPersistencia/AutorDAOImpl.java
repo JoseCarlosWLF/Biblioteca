@@ -89,28 +89,5 @@ public class AutorDAOImpl implements IDAO{
         return listaAutor;
     }
 
-    @Override
-    public void prestamo(Libro libro, Usuario usuario) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'prestamo'");
-    }
-
-    @Override
-    public void devolucion(Libro libro, Usuario usuario) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'devolucion'");
-    }
-
-    @Override
-    public void multa(long diasDiferencia, Usuario usuario) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'multa'");
-    }
-
-    @Override
-    public void consularLibroSucursal(Sucursal sucursal) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'consularLibroSucursal'");
-    }
-    
+   
 }

@@ -113,7 +113,7 @@ public class UserDAOImpl implements IDAO{
         return listaUsuarios;
     }
 
-    @Override
+  //--------------------------------------------------------------------------------------------------
     public void prestamo(Libro libro, Usuario usuario) {
         String sql = 
                 "INSERT INTO prestamo (id_libro, id_usuario, fecha_prestamo, fecha_devolucion) VALUES (?, ?, ?,?)";
@@ -139,8 +139,7 @@ public class UserDAOImpl implements IDAO{
             Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al guardar el prestamo", ex);
         }
     }
-
-    @Override
+//-----------------------------------------------------------------------------------------------------
     public void devolucion(Libro libro, Usuario usuario) {
         String sql = 
                 "DELETE FROM prestamo WHERE id_libro = ? AND id_usuario = ?";
@@ -162,7 +161,7 @@ public class UserDAOImpl implements IDAO{
             }
     }
 
-    @Override
+ //----------------------------------------------------------------------------------------------------
     public void multa(long diasDiferencia, Usuario usuario) {
         String sql = 
                 "INSERT INTO multa (id_usuario, dias_diferencia) VALUES (?, ?)";
@@ -184,11 +183,7 @@ public class UserDAOImpl implements IDAO{
             }
     }
 
-    @Override
-    public void consularLibroSucursal(Sucursal sucursal) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'consularLibroSucursal'");
-    }
+    
 
         
     }

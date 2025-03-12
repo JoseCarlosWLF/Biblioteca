@@ -20,7 +20,7 @@ CREATE TABLE Autor (
     nacionalidad VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE Libro (  -- Ahora se define antes de Prestamo
+CREATE TABLE Libro ( 
     id_libro INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(250) NOT NULL,
     editorial VARCHAR(100) NOT NULL,
@@ -50,9 +50,9 @@ CREATE TABLE Multa (
 
 CREATE TABLE Devolucion (
     id_devolucion INT AUTO_INCREMENT PRIMARY KEY,
-    id_prestamo INT NOT NULL,
+    id_usuario INT NOT NULL,
     fecha_devolucion DATE NOT NULL,
-    FOREIGN KEY (id_prestamo) REFERENCES Prestamo(id_prestamo)
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
 
 CREATE TABLE Sucursal (
@@ -99,3 +99,5 @@ INSERT INTO Libro (titulo, editorial, id_autor, cantidad) VALUES
 SELECT * FROM Usuario;
 SELECT * FROM Autor;
 SELECT * FROM Libro;
+
+
