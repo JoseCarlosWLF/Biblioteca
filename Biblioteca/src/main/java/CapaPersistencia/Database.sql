@@ -39,14 +39,6 @@ CREATE TABLE Prestamo (
     FOREIGN KEY (id_libro) REFERENCES Libro(id_libro)
 );
 
-CREATE TABLE Multa (
-    id_multa INT AUTO_INCREMENT PRIMARY KEY,
-    id_prestamo INT NOT NULL,
-    monto DECIMAL(10,2) NOT NULL,
-    id_usuario INT NOT NULL,
-    FOREIGN KEY (id_prestamo) REFERENCES Prestamo(id_prestamo),
-    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
-);
 
 CREATE TABLE Devolucion (
     id_devolucion INT AUTO_INCREMENT PRIMARY KEY,
