@@ -1,4 +1,5 @@
 C:\Users\vsfs2\Documents\REPOSITORIO\Biblioteca\Biblioteca\src\main\java\CapaNegocio\Libro.java
+C:\Users\vsfs2\Documents\REPOSITORIO\Biblioteca\Biblioteca\src\main\java\CapaNegocio\LibroServices.java
 C:\Users\vsfs2\Documents\REPOSITORIO\Biblioteca\Biblioteca\src\main\java\CapaNegocio\ManejadorLibros.java
 C:\Users\vsfs2\Documents\REPOSITORIO\Biblioteca\Biblioteca\src\main\java\CapaNegocio\ManejadorUsuario.java
 C:\Users\vsfs2\Documents\REPOSITORIO\Biblioteca\Biblioteca\src\main\java\CapaNegocio\Sucursal.java
@@ -6,7 +7,12 @@ C:\Users\vsfs2\Documents\REPOSITORIO\Biblioteca\Biblioteca\src\main\java\CapaNeg
 C:\Users\vsfs2\Documents\REPOSITORIO\Biblioteca\Biblioteca\src\main\java\CapaPersistencia\AutorDAOImpl.java
 C:\Users\vsfs2\Documents\REPOSITORIO\Biblioteca\Biblioteca\src\main\java\CapaPersistencia\ConexionDB.java
 C:\Users\vsfs2\Documents\REPOSITORIO\Biblioteca\Biblioteca\src\main\java\CapaPersistencia\IDAO.java
+C:\Users\vsfs2\Documents\REPOSITORIO\Biblioteca\Biblioteca\src\main\java\CapaPersistencia\LibroDAO.java
 C:\Users\vsfs2\Documents\REPOSITORIO\Biblioteca\Biblioteca\src\main\java\CapaPersistencia\LibroDAOImpl.java
 C:\Users\vsfs2\Documents\REPOSITORIO\Biblioteca\Biblioteca\src\main\java\CapaPersistencia\PrestamoDAOImpl.java
 C:\Users\vsfs2\Documents\REPOSITORIO\Biblioteca\Biblioteca\src\main\java\CapaPersistencia\UserDAOImpl.java
+C:\Users\vsfs2\Documents\REPOSITORIO\Biblioteca\Biblioteca\src\main\java\CapaPresentacion\FormularioDevolucion.java
+C:\Users\vsfs2\Documents\REPOSITORIO\Biblioteca\Biblioteca\src\main\java\CapaPresentacion\GestorPermisos.java
+C:\Users\vsfs2\Documents\REPOSITORIO\Biblioteca\Biblioteca\src\main\java\CapaPresentacion\TablaPrestamos.java
+C:\Users\vsfs2\Documents\REPOSITORIO\Biblioteca\Biblioteca\src\main\java\CapaPresentacion\VistaCatalogo.java
 C:\Users\vsfs2\Documents\REPOSITORIO\Biblioteca\Biblioteca\src\main\java\com\mycompany\biblioteca\Biblioteca.java

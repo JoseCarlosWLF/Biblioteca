@@ -5,16 +5,18 @@ public class Libro {
     String titulo;
     String editorial;
     int id_autor;
-    int anio;
+    String anio;
     int cantidad = 0;
+    int id_sucursal;
 
-    public Libro(int id, String titulo, String editorial, int id_autor, int anio, int cantidad) {
+    public Libro(int id, String titulo, String editorial, int id_autor, String anio, int cantidad, int id_sucursal) {
         this.id = id;
         this.titulo = titulo;
         this.editorial = editorial;
         this.id_autor = id_autor;
         this.anio = anio;
         this.cantidad = cantidad;
+        this.id_sucursal = id_sucursal;
     }
 
     public int getId() {
@@ -49,11 +51,11 @@ public class Libro {
         this.id_autor = id_autor;
     }
 
-    public int getAnio() {
+    public String getAnio() {
         return anio;
     }
 
-    public void setAnio(int anio) {
+    public void setAnio(String anio) {
         this.anio = anio;
     }
 
@@ -63,6 +65,14 @@ public class Libro {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+    
+    public void setId_sucursal(int id_sucursal){
+        this.id_sucursal = id_sucursal;
+    }
+    
+    public int getId_sucursal(){
+        return id_sucursal;
     }
 
     @Override
