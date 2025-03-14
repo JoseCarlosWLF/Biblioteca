@@ -1,10 +1,6 @@
 package com.mycompany.biblioteca;
-
 import CapaNegocio.ManejadorLibros;
-import CapaPersistencia.AutorDAOImpl;
 import CapaPersistencia.LibroDAOImpl;
-import CapaPersistencia.PrestamoDAOImpl;
-import CapaPersistencia.UserDAOImpl;
 import java.util.ArrayList;
 
 /*
@@ -23,8 +19,8 @@ public class Biblioteca {
         
         ManejadorLibros manejador  = new ManejadorLibros();
         
-        ArrayList datos1 = new ArrayList();
-        ArrayList datos2 = new ArrayList();       
+        ArrayList<Object> datos1 = new ArrayList<>();
+        ArrayList<Object> datos2 = new ArrayList<>();       
         
         datos1.add(2);
         datos1.add(1);
@@ -42,7 +38,7 @@ public class Biblioteca {
          
         
        LibroDAOImpl p = new LibroDAOImpl();
-       p.devolucion(1,2);
+       p.devolucion(0,1,2);
         
         
          

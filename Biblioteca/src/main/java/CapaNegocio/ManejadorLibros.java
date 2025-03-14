@@ -3,10 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package CapaNegocio;
-import CapaPersistencia.ConexionDB;
+
 import CapaPersistencia.LibroDAOImpl;
 import CapaPersistencia.PrestamoDAOImpl;
-import java.io.IOException;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
  *
  * @author vsfs2
  */
-public class ManejadorLibros {
+public class ManejadorLibros implements LibroServices {
     
     
     public String registrarDevolucion(int id_prestamo, int id_usuario, int id_libro ){
@@ -59,5 +59,12 @@ public class ManejadorLibros {
         long multa = diasDiferencia*2; 
         return multa;
     }
+
+
+@Override
+public ArrayList<Libro> obtenerLibrosPorSucursal(int idSucursal) {
+    LibroDAOImpl l = new LibroDAOImpl();
+    return l.listarLibrosSucursal(idSucursal);   
+}
    
 } 
