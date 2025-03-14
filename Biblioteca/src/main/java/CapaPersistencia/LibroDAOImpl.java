@@ -13,15 +13,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import CapaNegocio.Libro;
-import CapaNegocio.Sucursal;
-import CapaNegocio.Usuario;
 import java.time.LocalDate;
 
 /**
  *
  * @author vsfs2
  */
-public class LibroDAOImpl implements IDAO {
+public class LibroDAOImpl implements IDAO, LibroDAO{
     
     ConexionDB conexion;
     
@@ -193,29 +191,44 @@ public class LibroDAOImpl implements IDAO {
             }     
 
     }
-    
-  
 
-    public void consularLibroSucursal(Sucursal sucursal) {
-        String sql = 
-                "SELECT * FROM libro WHERE id_sucursal = ?";
+
+
+    @Override
+    public Libro buscarLibro(String isbn) {
+        String sql = "SELECT * FROM libro WHERE isbn = ? LIMIT 1"; // Solo devuelve un valor si existe
         try (Connection objConexion = conexion.obtenerConexion();
              PreparedStatement consulta = objConexion.prepareStatement(sql)) {
-
-   
-            // Asignar valores a los parámetros de la consulta
-            
-            consulta.setInt(1, sucursal.getId());
-      
-
-            // Ejecutar la consulta
-            ResultSet resultado = consulta.executeQuery();
-            while (resultado.next()) {
-                System.out.println(resultado.getString("titulo"));
+            consulta.setString(1, isbn); // Asignar el valor del parámetro
+            try (ResultSet resultado = consulta.executeQuery()) {
+                if (resultado.next()) {
+                    return new Libro(resultado.getInt("id_libro"), resultado.getString("titulo"), resultado.getString("editorial"), resultado.getInt("id_autor"), resultado.getString("anio"), resultado.getInt("cantidad"), resultado.getInt("id_sucursal"));
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al consultar el libro", ex);
         }
+        return null; // Si ocurre un error o no se encuentra el libro, devolver null
+    }
+
+    @Override
+    public ArrayList<Libro> listarLibrosSucursal(int idSucursal) {
+        String sql = "SELECT * FROM libro WHERE id_sucursal = ?"; // Solo devuelve un valor si existe
+        ArrayList<Libro> libros = new ArrayList<>();
+        Libro libro = null;
+        try (Connection objConexion = conexion.obtenerConexion();
+             PreparedStatement consulta = objConexion.prepareStatement(sql)) {
+            consulta.setInt(1, idSucursal); // Asignar el valor del parámetro
+            try (ResultSet resultado = consulta.executeQuery()) {
+                while (resultado.next()) {
+                    libro = new Libro(resultado.getInt("id_libro"), resultado.getString("titulo"), resultado.getString("editorial"), resultado.getInt("id_autor"), resultado.getString("anio"), resultado.getInt("cantidad"), resultado.getInt("id_sucursal"));
+                    libros.add(libro);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, "Error al consultar el libro", ex);
+        }
+        return libros; // Si ocurre un error o no se encuentra el libro, devolver null
     }
 
 }
